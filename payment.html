@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment Page</title>
+    <!-- Include necessary CSS and JavaScript (feather-icons) -->
+    <link rel="stylesheet" href="css/style.css" />
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+      .payment-form {
+        margin-top: 120px;
+        width: 80%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .payment-form h2 {
+        margin-top:120px;
+      }
+
+      .payment-form form {
+        margin-top: 120px;
+      }
+
+      .error-message {
+        color: red;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <a href="index.html" class="navbar-logo">Game.Store</a>
+      <div class="navbar-nav">
+        <a href="#game1">Games Populer</a>
+        <a href="#">|</a>
+        <a href="#game2">Games</a>
+      </div>
+      <div class="navbar-extra">
+        <a href="#" id="masuk"><i data-feather="log-in"></i></a>
+        <a href="#" id="search"><i data-feather="search"></i></a>
+        <a href="#" id="notifikasi"><i data-feather="bell"></i></a>
+        <a href="#" id="setting"><i data-feather="settings"></i></a>
+        <a href="#" id="keluar"><i data-feather="log-out"></i></a>
+      </div>
+    </nav>
+
+    <section class="payment-form">
+      <h2>Payment Details</h2>
+      <form
+        action="process_payment.php"
+        method="POST"
+        onsubmit="return validateForm()"
+      >
+
+  
+        </div>
+        <div class="form-group">
+          <label for="amount">Jumlah:</label>
+          <input type="number" id="amount" name="amount" required />
+        </div>
+        <div class="form-group">
+          <label for="username">Nama Pengguna:</label>
+          <input type="text" id="username" name="username" required />
+        </div>
+        <div class="form-group">
+          <label for="payment_method">Metode Pembayaran:</label>
+          <select id="payment_method" name="payment_method" required>
+            <option value="">Pilih Metode Pembayaran</option>
+            <option value="gopay">GoPay</option>
+            <option value="ovo">OVO</option>
+            <option value="telkomsel">Telkomsel</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="user_id">ID Pengguna:</label>
+          <input type="text" id="user_id" name="user_id" required />
+        </div>
+        <div class="form-group">
+          <button type="submit">Bayar</button>
+        </div>
+      </form>
+    </section>
+
+    <script>
+      feather.replace(); // Replace feather icons
+
+      function validateForm() {
+        var amount = document.getElementById("amount").value.trim();
+        var username = document.getElementById("username").value.trim();
+        var payment_method = document.getElementById("payment_method").value;
+        var user_id = document.getElementById("user_id").value.trim();
+        var isValid = true;
+        var errorMessage = "";
+
+        if (amount === "") {
+          errorMessage += "Amount harus diisi.\n";
+          isValid = false;
+        }
+        if (username === "") {
+          errorMessage += "Username harus diisi.\n";
+          isValid = false;
+        }
+        if (payment_method === "") {
+          errorMessage += "Payment Method harus dipilih.\n";
+          isValid = false;
+        }
+        if (user_id === "") {
+          errorMessage += "User ID harus diisi.\n";
+          isValid = false;
+        }
+
+        // Jika terdapat kesalahan, tampilkan pesan kesalahan
+        if (!isValid) {
+          alert(errorMessage);
+        }
+
+        return isValid; // Mengembalikan nilai true jika formulir valid, false jika tidak
+      }
+    </script>
+  </body>
+</html>
